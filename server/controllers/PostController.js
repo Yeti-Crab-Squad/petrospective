@@ -2,7 +2,7 @@ const { Post } = require('../models/BucketListModels');
 
 const PostController = {
   // creates new posts for your feed
-  addPost(req, res) {
+  addPost(req, res, next) {
     Post.create({
       listItem: req.body.listItem,
       date: req.body.date,
@@ -13,7 +13,9 @@ const PostController = {
       // imageUpload: Come back to this. Use GridFS to store images
     }, (err, newPost) => {
       if (err) {
-        res.sendStatus(400);
+        next({
+          log: 'Error creating post. Please check middleware syntax.',
+        });
       } else {
         res.status(200).send(newPost);
       }
@@ -21,12 +23,14 @@ const PostController = {
   },
 
   // displays posts in database
-  getPost(req, res) {
+  getPost(req, res, next) {
     const postTitle = req.params.title;
     Post.findOne({ listItem: postTitle },
       (err, foundPost) => {
         if (err) {
-          res.sendStatus(400);
+          next({
+            log: 'Error getting post. Please check middleware syntax.',
+          });
         } else {
           res.status(200).send(foundPost);
         }
@@ -34,31 +38,37 @@ const PostController = {
   },
 
   // allows you to edit and update posts for your feed
-  updatePost(req, res) {
+  updatePost(req, res, next) {
     const postTitle = req.params.title;
-    Post.findOne({ listItem: postTitle },
+    const update = {
+      listItem: req.body.listItem,
+      date: req.body.date,
+      postDescription: req.body.postDescription,
+      location: req.body.location,
+      youtubeLink: req.body.youtubeLink,
+      // imageUpload: req.body.imageUpload,
+    };
+    Post.findOneAndUpdate({ listItem: postTitle }, update,
       (err, updatedPost) => {
         if (err) {
-          res.sendStatus(400);
+          next({
+            log: 'Error updating post. Please check middleware syntax.',
+          });
         } else {
-          updatedPost.listItem = req.body.listItem;
-          updatedPost.date = req.body.date;
-          updatedPost.postDescription = req.body.postDescription;
-          updatedPost.location = req.body.location;
-          updatedPost.youtubeLink = req.body.youtubeLink;
-          // updatedPost.imageUpload = req.body.imageUpload;
           res.status(200).send(updatedPost);
         }
       });
   },
 
   // deletes posts from your feed
-  deletePost(req, res) {
+  deletePost(req, res, next) {
     const postTitle = req.params.title;
     Post.deleteOne({ listItem: postTitle },
       (err) => {
         if (err) {
-          res.sendStatus(400);
+          next({
+            log: 'Error deleting post. Please check middleware syntax.',
+          });
         } else {
           res.sendStatus(200);
         }
