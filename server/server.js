@@ -6,6 +6,8 @@ const PORT = 3000;
 const mongoose = require("mongoose");
 
 const petRouter = require("./routers/pets.js");
+const postRouter = require('./routers/posts');
+const listItemRouter = require('./routers/listItems');
 // uncomment once there is middleware
 // const api = require('./routers/api')
 
@@ -21,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // remember to npm install cors
 
 app.use("/pet", petRouter);
+app.use('/api/listItems', listItemRouter);
+app.use('/api/posts', postRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
