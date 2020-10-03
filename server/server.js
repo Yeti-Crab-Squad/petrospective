@@ -30,6 +30,8 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 
+// app.post request will trigger controller to Create a New User --> Pushing data to the noSQL database
+
 // Global error handler for catching middleware errors
 app.use((err, req, res, next) => {
   const defaultError = {
