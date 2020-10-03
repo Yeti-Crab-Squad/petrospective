@@ -114,18 +114,22 @@ function BucketlistItemDisplay(props) {
 
 export default BucketlistItemDisplay;
 
-const newPost = {
-  listItem,
-  dateCompleted, 
-  // some sort of access to an embedded google map
-  // add a date the listItem was created
-  dateCreated,
-  location,
-  postDescription,
-  // maybe rename to originalDescription
-  description,
-  youtubeLink,
-  hasCompleted,
-  mustAddPost
-  // Image upload parameter.
-}
+
+// make only one dexcription
+
+// const newPost = {
+//   listItem,
+//   dateCompleted, 
+//   // some sort of access to an embedded google map
+//   // add a date the listItem was created
+//   dateCreated,
+//   location,
+//   postDescription,
+//   // maybe rename to originalDescription
+//   // REMOVE DESCRIPTION
+//   description,
+//   youtubeLink,
+//   hasCompleted,
+//   mustAddPost
+//   // Image upload parameter.
+// }
