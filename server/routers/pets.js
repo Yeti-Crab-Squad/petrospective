@@ -7,7 +7,7 @@ router.post("/", petController.createPet, (req, res) => {
   res.send(200).json(res.locals.pets);
 });
 
-router.patch("/:username", petController.updatePetBio, (req, res) => {
+router.put("/:username", petController.updatePetBio, (req, res) => {
   res.send(200).json(res.locals.updatedBio);
 });
 
