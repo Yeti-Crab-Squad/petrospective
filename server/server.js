@@ -5,7 +5,7 @@ const cors = require("cors");
 const PORT = 3000;
 const mongoose = require("mongoose");
 
-const petController = require("./controllers/petController.js");
+const petRouter = require("./routers/pets.js");
 // uncomment once there is middleware
 // const api = require('./routers/api')
 
@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // remember to npm install cors
 
-app.use("/pet", petController);
+app.use("/pet", petRouter);
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
