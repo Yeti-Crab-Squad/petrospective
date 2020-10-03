@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "start": "nodemon server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack-dev-server & nodemon server/server.js --open"
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/andrew-lovato/petrospective#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.7",
     "oauth": "^0.9.15",
