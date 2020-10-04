@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-<<<<<<< HEAD
 import './styles.css';
-=======
 import Login from "./components/Login.jsx";
 // import Home from "./components/Home.jsx";
 // import Feed from "./containers/Feed.jsx";
 import Signup from "./components/Signup.jsx";
->>>>>>> 0f8930deaf6857379bfc48b5bf0cf71e7485b80e
+
 
 class App extends Component {
   render() {
