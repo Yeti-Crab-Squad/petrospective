@@ -3,6 +3,7 @@ import React from 'react';
 function AddPostForm(props) {
   return (
     <div>
+      {/* research ways to formalize Date input data */}
     <label htmlFor="completionDate">Date Completed:</label>
     <input value={props.state.dateCompleted}  onChange={props.handleDateChange} id='completionDate' type="text"/>
     <label htmlFor="postTextArea">Post Body:</label>
@@ -18,5 +19,6 @@ function AddPostForm(props) {
   </div>
   )
 }
+
 
 export default AddPostForm;

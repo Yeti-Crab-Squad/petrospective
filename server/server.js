@@ -15,14 +15,16 @@ const MONGO_URI =
   "mongodb+srv://AndrewL:bucketlist@cluster0.00tox.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
 mongoose
-  .connect(MONGO_URI, { useNewUrlParser: true })
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("CONNECTED TO MONGO DB"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // remember to npm install cors
 
-app.use("/pet", petRouter);
+// changed to /api/pet so that it will be routed through the webpack router
+// app.use("/pet", petRouter);
+app.use("/api/pet", petRouter);
 app.use('/api/listItems', listItemRouter);
 app.use('/api/posts', postRouter);
 
@@ -44,6 +46,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+<<<<<<< HEAD
 // Seed the database
 const postSeedDb = {
   listItem: 'I want to hike in Central Park with Rocko',
@@ -68,6 +71,8 @@ fetch('/api/posts', {
 .catch(err =>{
   console.log(err)
 })
+=======
+>>>>>>> fixissues
 
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));
