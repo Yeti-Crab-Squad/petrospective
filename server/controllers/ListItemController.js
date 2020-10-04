@@ -13,7 +13,9 @@ const ListItemController = {
         });
       }
       res.locals.items = newItem;
-      res.status(200).send(newItem);
+         // changed to.json
+      // res.status(200).send(newItem);
+      res.status(200).json(newItem);
     });
   },
 
@@ -26,7 +28,9 @@ const ListItemController = {
             log: 'Error getting list item. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(foundItem);
+                   // changed to.json
+      // res.status(200).send(newItem);
+          res.status(200).json(foundItem);
         }
       });
   },

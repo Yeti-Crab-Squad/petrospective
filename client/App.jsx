@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import './styles.css';
 import Login from "./components/Login.jsx";
 // import Home from "./components/Home.jsx";
 // import Feed from "./containers/Feed.jsx";
 import Signup from "./components/Signup.jsx";
+import Bucketlist from './components/Bucketlist.jsx'
+
 
 class App extends Component {
   render() {
     return (
       <div>
+<<<<<<< HEAD
         <Signup />
+=======
+        <Login />
+        {/* <Bucketlist /> */}
+>>>>>>> f342d4b4013cdc82e99eb2980f031c12ba43e0f2
       </div>
     )
   }
