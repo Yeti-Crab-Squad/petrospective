@@ -4,12 +4,41 @@ import { json } from 'express';
 import AddPostForm from './AddPostForm.jsx'
 import CompletedBucketlistItem from './CompletedBucketlistItem.jsx'
 import UncompletedBucketlistItem from './UncompletedBucketlistItem.jsx'
+import DisplayPost from './DisplayPost.jsx'
 
 function BucketlistItemDisplay(props) {
-  const [state, setState] = useState(props);
+  const [state, setState] = useState(props.item);
+  setState(...state, state.images = [])
+  setState(...state, state.handleImagesChange = '')
 
-  function handleCheckedOffClick(key) {
-    setState(...state, state.hasCompleted = true, state.mustAddPost = true)
+  function handleCheckedOffClick(listItem) {
+
+    useEffect(() => {
+      const updatedItem = {
+        isChecked: true,
+        mustAddPost: true
+      }
+      
+      fetch(`/api/listItems/${listItem}`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: updatedItem
+      })
+      .then(res => res.json())
+      .then(data => {
+        setState(...state, state.isChecked = true, state.mustAddPost = true)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    })
+
+  
+
+
+
   }
 
   function handleDateChange(e) {
@@ -46,13 +75,11 @@ function BucketlistItemDisplay(props) {
     useEffect(() => {
       const newPost = {
         listItem: state.listItem,
-        dateCompleted: state.dateCompleted,
-        location: state.location,
+        date: state.dateCompleted,
         postDescription: state.postDescription,
         youtubeLink: state.youtubeLink,
-        hasCompleted: true,
-        mustAddPost: false
-        // Image upload parameter goes here.
+        location: state.googleLink,
+        // images: state.images
       }
 
       fetch('/api/post/compelete-bucket-list-item', {
@@ -73,38 +100,67 @@ function BucketlistItemDisplay(props) {
     })
   }
 
+  function handleGoogleLinkChange(e) {
+    e.preventDefault()
+    const newValue = e.target.value;
+
+    setState(...state, state.googleLink = newValue)
+  }
+
+  function handleAddImagesChange(e){
+    e.preventDefault()
+    const newValue = e.target.value;
+
+    setState(...state, state.handleImagesChange = newValue)
+  }
+
+  function handleAddImagesClick() {
+    setState(...state, state.images.push(state.handleImagesChange))
+    setState(...state, state.handleImagesChange = '');
+
+  }
 
 
-  if (state.hasCompleted && state.mustAddPost) {
+
+  if (state.isChecked && state.mustAddPost) {
 
     return (
-       <AddPostForm 
-        state={state}
-        handleDateChange={handleDateChange} 
-        handleBodyOfPostChange={handleBodyOfPostChange}
-        handleYoutubeURLChange={handleYoutubeURLChange}
-    /> 
-    )
-  } else if (state.hasCompleted) {
-    
-    return (
-      <CompletedBucketlistItem 
-        key={props.key}
-        hasCompleted={props.hasCompleted}
+      <div>
+       <UncompletedBucketlistItem
         listItem={props.listItem}
-        dateCompleted={props.dateCompleted}
-        description={props.description}
+        isChecked={props.isChecked}
+        key={props.key} 
+        handleCheckedOffClick={handleCheckedOffClick}
       />
+          <AddPostForm 
+      state={state}
+      handleDateChange={handleDateChange} 
+      handleBodyOfPostChange={handleBodyOfPostChange}
+      handleGoogleLinkChange={handleGoogleLinkChange}
+      handleYoutubeURLChange={handleYoutubeURLChange}
+      handleAddImagesChange={handleAddImagesChange}
+      handleAddImagesClick={handleAddImagesClick}
+      handleSubmitPostClick={handleSubmitPostClick}
+    /> 
+      </div>
     )
+  } else if (state.item.isChecked) {
+        return (
+          <CompletedBucketlistItem 
+            key={props.key}
+            listItem={props.listItem}
+            dateCompleted={props.dateCompleted}
+            description={props.description}
+          />
+        )
   } else {
 
     return (
       <UncompletedBucketlistItem
-        key={props.key}
-        hasCompleted={props.hasCompleted}
         listItem={props.listItem}
-        dateCreated={props.dateCreated}
-        description={props.description}
+        isChecked={props.isChecked}
+        key={props.key} 
+        
         handleCheckedOffClick={handleCheckedOffClick}
       />
     )

@@ -5,6 +5,7 @@ import Login from "./components/Login.jsx";
 // import Home from "./components/Home.jsx";
 // import Feed from "./containers/Feed.jsx";
 import Signup from "./components/Signup.jsx";
+import Bucketlist from './components/Bucketlist.jsx'
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div>
         <Login />
+        <Bucketlist />
       </div>
     )
   }
