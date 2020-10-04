@@ -21,29 +21,48 @@ class Signup extends Component {
     return (
       <div className = 'form-container'>
         <h1>Welcome !</h1>
-        <form>
-          <label>
-            Pet Name:
-            <input type="text" name="name" />
-          </label>
-          <br />
-          <label>
-            E-mail:
-            <input type="text" name="name" />
-          </label>
-          <br />
-          <label>
-            Username:
-            <input type="text" name="name" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="text" name="name" />
-          </label>
-          <input type="submit" value="Submit!" />
+        <div>
+          <div className="input-group">
+            <label htmlFor="username">Name:</label>
+            <input 
+              type="text"
+              name="username"
+              placeholder="Name"
+              id="username"
+              ></input>
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Age:</label>
+            <input 
+              type="text"
+              name="password"
+              placeholder="Age"
+              id="signupPassword"
+              ></input>
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Username:</label>
+            <input 
+              type="text"
+              name="username"
+              placeholder="Username"
+              id="username"
+              ></input>
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Password:</label>
+            <input 
+              type="text"
+              name="password"
+              placeholder="Password"
+              id="password"
+              ></input>
+          </div>
+          <button value="Sign Up" className='login-btn'>
+            Sign Up
+          </button>
 
-        </form>
+        </div>
       </div>
     );
   }

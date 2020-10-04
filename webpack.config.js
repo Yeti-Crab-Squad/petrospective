@@ -24,14 +24,14 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           }
         }]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.css$/, //changed to specify css instead of previous "catch all" test regex item including scss
         exclude: /(node_modules)/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       }
     ]
   }

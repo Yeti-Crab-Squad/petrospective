@@ -16,7 +16,7 @@ const MONGO_URI =
 
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true })
-  .then(() => console.log("CONNECTED TO MONGO DB"));
+  .then(() => console.log("**************************************CONNECTED TO MONGO DB**************************************"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -44,4 +44,4 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));
+app.listen(PORT, () => console.log(`**************************************Listening on PORT: ${PORT}.**************************************`));
