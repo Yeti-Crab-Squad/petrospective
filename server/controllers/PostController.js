@@ -17,7 +17,9 @@ const PostController = {
           log: 'Error creating post. Please check middleware syntax.',
         });
       } else {
-        res.status(200).send(newPost);
+        // changed to.json
+        // res.status(200).send(newPost);
+        res.status(200).json(newPost);
       }
     });
   },
@@ -32,7 +34,9 @@ const PostController = {
             log: 'Error getting post. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(foundPost);
+             // changed to.json
+        // res.status(200).send(newPost);
+          res.status(200).json(foundPost);
         }
       });
   },
@@ -55,7 +59,9 @@ const PostController = {
             log: 'Error updating post. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(updatedPost);
+             // changed to.json
+        // res.status(200).send(newPost);
+          res.status(200).json(updatedPost);
         }
       });
   },

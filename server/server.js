@@ -22,7 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors()); // remember to npm install cors
 
-app.use("/pet", petRouter);
+// changed to /api/pet so that it will be routed through the webpack router
+// app.use("/pet", petRouter);
+app.use("/api/pet", petRouter);
 app.use('/api/listItems', listItemRouter);
 app.use('/api/posts', postRouter);
 
