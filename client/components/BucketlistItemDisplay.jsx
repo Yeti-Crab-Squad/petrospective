@@ -79,7 +79,7 @@ function BucketlistItemDisplay(props) {
         postDescription: state.postDescription,
         youtubeLink: state.youtubeLink,
         location: state.googleLink,
-        // images: state.images
+        images: state.images
       }
 
       fetch('/api/post/compelete-bucket-list-item', {
