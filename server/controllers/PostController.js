@@ -2,8 +2,10 @@ const { Post } = require('../models/BucketListModels');
 
 const PostController = {
   // creates new posts for your feed
+
   addPost(req, res, next) {
-    Post.create({
+
+     Post.create({
       listItem: req.body.listItem,
       date: req.body.date,
       postDescription: req.body.postDescription,
@@ -23,6 +25,8 @@ const PostController = {
       }
     });
   },
+
+  
 
   // displays posts in database
   getPost(req, res, next) {

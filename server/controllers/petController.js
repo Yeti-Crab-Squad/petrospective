@@ -22,7 +22,7 @@ PetController.createPet = (req, res, next) => {
 PetController.updatePetBio = (req, res, next) => {
   // Changed this to access the username, not bio, because was set to username in the initial route
   // const { bio } = req.params;
-  const { username } = req.parms
+  const { username } = req.params
   const { updatedBio } = req.body;
   Pet.findOneAndUpdate(
     // changed to username
