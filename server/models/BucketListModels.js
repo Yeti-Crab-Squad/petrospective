@@ -22,7 +22,7 @@ const postSchema = new Schema({
   location: { type: String, required: true },
   // is the above a Google Maps URL or a string that tells Maps to make a map?
   youtubeLink: String,
-  // imageUpload: Come back to this. Use GridFS to store images
+  images: Array,
 });
 
 // create a model that conforms to the schema
