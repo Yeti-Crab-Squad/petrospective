@@ -2,8 +2,10 @@ const { Post } = require('../models/BucketListModels');
 
 const PostController = {
   // creates new posts for your feed
+
   addPost(req, res, next) {
-    Post.create({
+
+     Post.create({
       listItem: req.body.listItem,
       date: req.body.date,
       postDescription: req.body.postDescription,
@@ -17,11 +19,13 @@ const PostController = {
           log: 'Error creating post. Please check middleware syntax.',
         });
       } else {
-        res.status(200).send(newPost);
+        // changed to.json
+        // res.status(200).send(newPost);
+        res.status(200).json(newPost);
       }
     });
   },
-
+  
   getAllPosts(req, res, next) {
     Post.find({},
       (err, allPosts) => {
@@ -47,7 +51,9 @@ const PostController = {
             log: 'Error getting post. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(foundPost);
+             // changed to.json
+        // res.status(200).send(newPost);
+          res.status(200).json(foundPost);
         }
       });
   },
@@ -71,7 +77,9 @@ const PostController = {
             log: 'Error updating post. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(updatedPost);
+             // changed to.json
+        // res.status(200).send(newPost);
+          res.status(200).json(updatedPost);
         }
       });
   },
