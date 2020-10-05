@@ -37,12 +37,9 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.3.0",
-<<<<<<< HEAD
     "sass": "^1.26.11",
-=======
     "fs": "0.0.1-security",
     "path": "^0.12.7",
->>>>>>> f342d4b4013cdc82e99eb2980f031c12ba43e0f2
     "sass-loader": "^10.0.2",
     "style-loader": "^1.3.0",
     "webpack": "^4.44.2",

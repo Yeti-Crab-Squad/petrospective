@@ -15,13 +15,8 @@ const MONGO_URI =
   "mongodb+srv://AndrewL:bucketlist@cluster0.00tox.mongodb.net/<dbname>?retryWrites=true&w=majority";
 
 mongoose
-<<<<<<< HEAD
-  .connect(MONGO_URI, { useNewUrlParser: true })
-  .then(() => console.log("**************************************CONNECTED TO MONGO DB**************************************"));
-=======
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("CONNECTED TO MONGO DB"));
->>>>>>> f342d4b4013cdc82e99eb2980f031c12ba43e0f2
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
