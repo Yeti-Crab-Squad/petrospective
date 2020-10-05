@@ -46,7 +46,6 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-<<<<<<< HEAD
 // Seed the database
 const postSeedDb = {
   listItem: 'I want to hike in Central Park with Rocko',
@@ -71,8 +70,6 @@ fetch('/api/posts', {
 .catch(err =>{
   console.log(err)
 })
-=======
->>>>>>> fixissues
 
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));
