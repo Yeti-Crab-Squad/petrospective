@@ -26,18 +26,16 @@ class Signup extends Component {
             <label htmlFor="username">Name:</label>
             <input 
               type="text"
-              name="username"
+              name="name"
               placeholder="Name"
-              id="username"
               ></input>
           </div>
           <div className="input-group">
             <label htmlFor="username">Age:</label>
             <input 
               type="text"
-              name="password"
+              name="age"
               placeholder="Age"
-              id="signupPassword"
               ></input>
           </div>
           <div className="input-group">
