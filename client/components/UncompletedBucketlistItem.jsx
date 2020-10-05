@@ -1,21 +1,15 @@
-import React from 'react';
+import React from "react";
 
 function UncompletedBucketlistItem(props) {
-
-  if (props.isChecked) {
-    return (
-      <div key={props.key}>
+  return (
+    <div key={props.key} className='uncompleted-list-item'>
       <h2>{props.listItem}</h2>
+      <input
+        onClick={() => props.handleCheckedOffClick(props.listItem)}
+        type='checkbox'
+      />
     </div>
-    )
-  } else {
-    return (
-      <div key={props.key}>
-      <h2>{props.listItem}</h2>
-      <input onClick={() => props.handleCheckedOffClick(props.listItem)} type="checkbox"/>
-    </div>
-    )
-  }
+  );
 
 }
 
