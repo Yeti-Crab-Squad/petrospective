@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
     status: 400,
     message: { err: "Uh-oh, error time, baby! :)" },
   };
-  const errorObj = Object.assign({}, defaultErr, err);
+  const errorObj = Object.assign({}, defaultError, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
@@ -56,7 +56,6 @@ app.use((err, req, res, next) => {
 //   images: ['image1', 'image2']
 // }
 
-<<<<<<< HEAD
 // fetch('/api/posts', {
 //   method: 'POST',
 //   headers: {
@@ -71,22 +70,6 @@ app.use((err, req, res, next) => {
 // .catch(err =>{
 //   console.log(err)
 // })
-=======
-fetch('/api/posts', {
-  method: 'POST',
-  headers: {
-    'Content-type': 'application/json'
-  },
-  body: postSeedDb
-})
-.then(res => res.json())
-.then(data => {
-  console.log('Post data was added to the DB')
-})
-.catch(err =>{
-  console.log(err)
-})
->>>>>>> 350310ca6b5a7517ed0f7b1dc42846291d186e97
 
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));

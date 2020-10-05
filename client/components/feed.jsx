@@ -1,51 +1,54 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const Feed = (props) => {
-  const completeItems = {
-  listItem: 'I want to hike in Central Park with Rocko',
-  date: 'Jan 7th 2058',
-  postDescription: "Central Park sure has changed",
-  youtubeLink: 'fakeYoutubeLink',
-  location: 'fakeYoutubeLink',
-  images: ['image1', 'image2']
-}
+  const [posts, setPosts] = useState([]);
 
-  function renderTable() {
+  useEffect(() => {
     fetch('http://localhost:3000/api/posts')
-      .then(res = res.json())
-      .then(completeItems => {
-        return completeItems.map((feedItems, index) => {
-          {listItem, date, postDescription, location, youtubeLink, images} = feedItems;
-          return (
-            <div>
-              <h3>{listItem}</h3>
-              <h6>{date}</h6>
-              
-              <div>
-                <p>{postDescription}</p>
-                <iframe width="320" height="240" src={youtubeLink} ></iframe>
-                {images.map(image => {
-                  return <img src={image} alt="image not loaded"></img>
-                })}
-              </div>
-            </div>
-          )
-        })
-      })
-  }
+      .then((res) => res.json())
+      .then((completeItems) => {
+        setPosts(posts.concat(...completeItems));
+      });
+  }, []);
 
-  render() {
-    return (
+  return (
+    <div>
+      {/* <div className="feed-container"> */}
+      <h1>MY PET TIME CAPSULE</h1>
+      {posts.map((post) => {
+        {
+          console.log(post);
+        }
+        return <RenderPost post={post} />;
+      })}
+    </div>
+  );
+};
+
+//API_KEY = AIzaSyCyw8Q7SqmZ8RbKT6HgInw5Bcp93emrlNU
+function RenderPost(props) {
+  return (
+    <div>
+      <h3>{props.post.listItem}</h3>
+      <h6>{props.post.dateCompleted}</h6>
+      <iframe width="320" height="240" src={props.post.location}></iframe>
       <div>
-        <div className="feed-container">
-          <div className="feed-items">{this.renderTable()}</div>
-        </div>
+        <p>{props.post.postDescription}</p>
+        <iframe width="320" height="240" src={props.post.youtubeLink}></iframe>
+        {props.post.images.map((image) => {
+          return (
+            <img
+              width="320"
+              height="240"
+              src={image}
+              alt="image not loaded"
+            ></img>
+          );
+        })}
       </div>
-    )
-  }
+    </div>
+  );
 }
-
-
 
 export default Feed;
