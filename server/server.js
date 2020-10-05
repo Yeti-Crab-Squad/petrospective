@@ -28,7 +28,11 @@ app.use("/api/pet", petRouter);
 app.use('/api/listItems', listItemRouter);
 app.use('/api/posts', postRouter);
 
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../index.html"));
+// });
+
+app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 
@@ -45,7 +49,5 @@ app.use((err, req, res, next) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));

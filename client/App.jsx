@@ -10,13 +10,27 @@ import Bucketlist from './components/Bucketlist.jsx'
 
 class App extends Component {
   render() {
-    return (
+    return (      
       <div>
-        <Signup />
+        <Login />
       </div>
     )
   }
 }
+// const App = () => {
+//   <div>
+//     <Router>
+//       <Switch>
+//         {/* <Route exact path="/login" component={Login} />
+//         <Route exact path="/signup" component={Signup} />
+//         <Route exact path="/feed" component={Feed} /> */}
+//         <Route exact path="/" component={Login} />
+//         {/* <div>404, dawg</div> */}
+//         </Switch>
+//       </Router>
+//   </div>
+// }
+
 
 export default App;
 
