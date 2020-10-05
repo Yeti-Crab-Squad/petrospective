@@ -88,6 +88,20 @@ const PostController = {
         }
       });
   },
+
+  deletePost(req, res, next) {
+    const postTitle = req.params.title;
+    Post.deleteMany({},
+      (err) => {
+        if (err) {
+          next({
+            log: 'Error deleting post. Please check middleware syntax.',
+          });
+        } else {
+          res.sendStatus(200);
+        }
+      });
+  },
 };
 
 module.exports = PostController;

@@ -30,7 +30,11 @@ const ListItemController = {
             log: "Error grabbing list items. Please check middleware syntax.",
           });
         } else {
-          res.status(200).send(allItems);
+
+
+          res.status(200).json(allItems);
+
+
         }
       });
   },
@@ -55,9 +59,9 @@ const ListItemController = {
       isChecked: req.body.isChecked,
       hasPost: req.body.hasPost,
     };
-    ListItem.findOneAndUpdate(
-      { listItem: itemTitle },
-      update,
+
+    ListItem.findOneAndUpdate({ listItem: itemTitle }, update, {new: true},
+
       (err, updatedItem) => {
         if (err) {
           next({
@@ -87,6 +91,20 @@ const ListItemController = {
         }
       }
     );
+  },
+
+  deleteItem(req, res, next) {
+    const itemTitle = req.params.item;
+    ListItem.deleteMany({
+    }, (err) => {
+      if (err) {
+        next({
+          log: 'Error deleting list item. Please check middleware syntax.',
+        });
+      } else {
+        res.sendStatus(200);
+      }
+    });
   },
 };
 

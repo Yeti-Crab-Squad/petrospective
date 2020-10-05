@@ -18,28 +18,29 @@ function BucketlistItemDisplay(props) {
 
 
 
-  function handleCheckedOffClick(listItem) {
-      const updatedItem = {
-        listItem: listItem,
-        isChecked: true,
-        hasPost: false
-      }
+  // function handleCheckedOffClick(listItem) {
+  //     const updatedItem = {
+  //       listItem: listItem,
+  //       isChecked: true,
+  //       hasPost: false
+  //     }
       
-      fetch(`/api/listItems/${listItem}`,{
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedItem)
-      })
-      .then(res => res.json())
-      .then(data => {
-        // setState(state.isChecked = true, state.hasPost = false)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
+  //     fetch(`/api/listItems/${listItem}`,{
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(updatedItem)
+  //     })
+  //     .then(res => res.json())
+  //     .then(data => {
+
+  //       // setState(state.isChecked = true, state.hasPost = false)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // }
 
   function handleDateChange(e) {
     e.preventDefault()
@@ -110,6 +111,14 @@ function BucketlistItemDisplay(props) {
         })
         .then(res => res.json())
         .then(data => {
+
+          fetch('/api/listItems')
+      .then(res => res.json())
+      .then(data => {
+        setState(data)  
+        console.log("POST",bucketlistItems)
+
+      })
           console.log('Have updated list item, HAS POST is TRUE')
         })
       
@@ -154,10 +163,17 @@ function BucketlistItemDisplay(props) {
        <UncompletedBucketlistItem
         listItem={state.listItem}
         isChecked={state.isChecked}
-        handleCheckedOffClick={handleCheckedOffClick}
+        handleCheckedOffClick={props.handleCheckedOffClick}
       />
           <AddPostForm 
+
+
       state={state}
+      date={date}
+      postDescription={postDescription}
+      YTLink={YTLink}
+      GMLink={GMLink}
+      imagesChange={imagesChange}
       handleDateChange={handleDateChange} 
       handleBodyOfPostChange={handleBodyOfPostChange}
       handleGoogleLinkChange={handleGoogleLinkChange}
@@ -184,7 +200,7 @@ function BucketlistItemDisplay(props) {
         listItem={state.listItem}
         isChecked={state.isChecked}
         
-        handleCheckedOffClick={handleCheckedOffClick}
+        handleCheckedOffClick={props.handleCheckedOffClick}
       />
     )
   }

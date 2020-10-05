@@ -10,6 +10,7 @@ function UncompletedBucketlistItem(props) {
       />
     </div>
   );
+
 }
 
 export default UncompletedBucketlistItem;

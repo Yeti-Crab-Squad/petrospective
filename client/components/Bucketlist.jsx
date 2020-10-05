@@ -16,6 +16,41 @@ function Bucketlist(props) {
       });
   }, []);
 
+
+  function handleCheckedOffClick(listItem) {
+    const updatedItem = {
+      listItem: listItem,
+      isChecked: true,
+      hasPost: false
+    }
+    
+    fetch(`/api/listItems/${listItem}`,{
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedItem)
+    })
+    .then(res => res.json())
+    .then(listItemData => {
+      console.log("",listItemData)
+      console.log("PRE",bucketlistItems)
+      fetch('/api/listItems')
+      .then(res => res.json())
+      .then(data => {
+        setBucketlistItems(data)  
+        console.log("POST",bucketlistItems)
+
+      })
+      
+
+      // setState(state.isChecked = true, state.hasPost = false)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+}
+
   function handleNewItemClick() {
     const newListItem = {
       listItem: newItem,
@@ -38,6 +73,7 @@ function Bucketlist(props) {
             console.log(bucketlistItems.concat(...data));
           });
       });
+
   }
 
   function handleNewItemChange(e) {
@@ -62,6 +98,7 @@ function Bucketlist(props) {
       </div>
     </>
   );
+
 }
 
 export default Bucketlist;

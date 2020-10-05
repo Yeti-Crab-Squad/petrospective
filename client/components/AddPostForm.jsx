@@ -39,6 +39,7 @@ function AddPostForm(props) {
       </button>
     </div>
   );
+
 }
 
 export default AddPostForm;
