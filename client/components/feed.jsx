@@ -15,8 +15,8 @@ const Feed = (props) => {
 
   return (
     <div>
+      <Header />
       {/* <div className="feed-container"> */}
-      <h1>MY PET TIME CAPSULE</h1>
       {posts.map((post) => {
         {
           console.log(post);
@@ -31,22 +31,28 @@ const Feed = (props) => {
 function RenderPost(props) {
   return (
     <>
-      <Header />
       <div className='feed-container'>
-        <h3>{props.post.listItem}</h3>
-        <h6>{props.post.dateCompleted}</h6>
-        <iframe width='320' height='240' src={props.post.location}></iframe>
-        <div>
+        <div className='title-date'>
+          <h3>{props.post.listItem}</h3>
+          <h6>{props.post.dateCompleted}</h6>
+        </div>
+
+        <iframe
+          id='map-img'
+          width='320'
+          height='240'
+          src={props.post.location}></iframe>
+        <div className='image-container'>
           <p>{props.post.postDescription}</p>
           <iframe
-            width='320'
-            height='240'
+            width='200'
+            height='200'
             src={props.post.youtubeLink}></iframe>
           {props.post.images.map((image) => {
             return (
               <img
-                width='320'
-                height='240'
+                width='200'
+                height='200'
                 src={image}
                 alt='image not loaded'></img>
             );

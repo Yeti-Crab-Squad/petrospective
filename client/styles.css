@@ -14,8 +14,30 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Fredoka One", "Arial Narrow", Arial, sans-serif;
+  font-family: "Shrikhand", "Arial Narrow", Arial, sans-serif;
   color: black;
+}
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+#header-nav {
+  padding: 20px;
+  border: 2px solid #ffd57e;
+  background-color: #ffd57e;
+}
+#header-nav nav ul {
+  display: flex;
+  justify-content: flex-start;
+}
+#header nav ul li a {
+  font-size: 1.2rem;
+}
+#header-nav nav ul li {
+  margin-right: 10px;
 }
 
 .form-container {
@@ -56,7 +78,7 @@
   border: 2px solid #fca652;
   margin-bottom: 10px;
   border-radius: 5px;
-  /* cursor: pointer; */
+  cursor: pointer;
 }
 
 .login-btn:hover {
@@ -80,4 +102,61 @@
   padding: 0.25em;
   align-items: flex-start;
   justify-content: center;
+}
+.feed-container {
+  margin: 20px auto;
+  width: 1000px;
+  border: 1px solid black;
+  padding: 20px;
+}
+.title-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  /* align-items: flex-start; */
+}
+.title-date h3 {
+  align-self: center;
+}
+
+.image-container {
+  margin-top: 20px;
+}
+
+#create-list-item {
+  padding: 20px 20px 20px 0;
+}
+#create-list-item label {
+  margin-right: 10px;
+}
+
+#create-list-item input {
+  margin-right: 10px;
+}
+
+#bucket-list-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.uncompleted-post-form {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+.completed-list-item,
+.uncompleted-list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 800px;
+  align-items: center;
+}
+
+.uncompleted-post-form button {
+  margin-bottom: 20px;
 }
