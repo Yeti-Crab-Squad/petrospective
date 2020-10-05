@@ -7,7 +7,6 @@ import Feed from "./components/Feed.jsx";
 import Signup from "./components/Signup.jsx";
 import Bucketlist from './components/Bucketlist.jsx'
 
-
 const App = () => {
   return (
   <div>
@@ -24,13 +23,3 @@ const App = () => {
 }
 
 export default App;
-
-//<Router>
-//<Switch>
-//  <Route exact path="/login" component={Login} />
-//  <Route exact path="/signup" component={Signup} />
-//  {/* <Route exact path="/feed" component={Feed} /> */}
-//  <Route exact path="/" component={Login} />
-//  <div>404, dawg</div>
-//</Switch>
-//</Router>

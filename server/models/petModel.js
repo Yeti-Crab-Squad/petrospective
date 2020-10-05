@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const petSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  profilePicture: { type: String, required: true },
-  age: { type: Number, require: true },
+  profilePicture: { type: String},
+  age: { type: String, require: true },
   bio: { type: String },
   name: { type: String, required: true },
 });

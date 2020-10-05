@@ -21,14 +21,12 @@ module.exports = {
       {
         test: /\.jsx?/,
         exclude: /(node_modules)/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
-          },
-        ],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          }
+        }]
       },
       {
         test: /\.css$/, //changed to specify css instead of previous "catch all" test regex item including scss
@@ -37,5 +35,4 @@ module.exports = {
       }
     ]
   }
-
 };
