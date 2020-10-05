@@ -12,12 +12,7 @@ class App extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
         <Signup />
-=======
-        <Login />
-        {/* <Bucketlist /> */}
->>>>>>> f342d4b4013cdc82e99eb2980f031c12ba43e0f2
       </div>
     )
   }
