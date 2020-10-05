@@ -46,30 +46,6 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-// Seed the database
-const postSeedDb = {
-  listItem: 'I want to hike in Central Park with Rocko',
-  date: 'Jan 7th 2058',
-  postDescription: "Central Park sure has changed",
-  youtubeLink: 'fakeYoutubeLink',
-  location: 'fakeYoutubeLink',
-  images: ['image1', 'image2']
-}
-
-fetch('/api/posts', {
-  method: 'POST',
-  headers: {
-    'Content-type': 'application/json'
-  },
-  body: postSeedDb
-})
-.then(res => res.json())
-.then(data => {
-  console.log('Post data was added to the DB')
-})
-.catch(err =>{
-  console.log(err)
-})
 
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));
