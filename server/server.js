@@ -28,7 +28,11 @@ app.use("/api/pet", petRouter);
 app.use('/api/listItems', listItemRouter);
 app.use('/api/posts', postRouter);
 
-app.get("/", (req, res) => {
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../index.html"));
+// });
+
+app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 
@@ -41,35 +45,9 @@ app.use((err, req, res, next) => {
     status: 400,
     message: { err: "Uh-oh, error time, baby! :)" },
   };
-  const errorObj = Object.assign({}, defaultErr, err);
+  const errorObj = Object.assign({}, defaultError, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
-// Seed the database
-const postSeedDb = {
-  listItem: 'I want to hike in Central Park with Rocko',
-  date: 'Jan 7th 2058',
-  postDescription: "Central Park sure has changed",
-  youtubeLink: 'fakeYoutubeLink',
-  location: 'fakeYoutubeLink',
-  images: ['image1', 'image2']
-}
-
-// fetch('/api/posts', {
-//   method: 'POST',
-//   headers: {
-//     'Content-type': 'application/json'
-//   },
-//   body: postSeedDb
-// })
-// .then(res => res.json())
-// .then(data => {
-//   console.log('Post data was added to the DB')
-// })
-// .catch(err =>{
-//   console.log(err)
-// })
-
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}.`));

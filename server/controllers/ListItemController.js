@@ -26,7 +26,11 @@ const ListItemController = {
             log: 'Error grabbing list items. Please check middleware syntax.',
           });
         } else {
+<<<<<<< HEAD
           res.status(200).send(allItems);
+=======
+          res.status(200).json(allItems);
+>>>>>>> main
         }
       },
     );
@@ -43,7 +47,7 @@ const ListItemController = {
         } else {
           res.status(200).json(foundItem);
         }
-      });
+     });
   },
 
   updateItem(req, res, next) {
@@ -60,7 +64,7 @@ const ListItemController = {
             log: 'Error updating list item. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(updatedItem);
+          res.status(200).json(updatedItem);
         }
       });
   },

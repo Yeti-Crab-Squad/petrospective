@@ -20,7 +20,7 @@ const postSchema = new Schema({
   postDescription: { type: String, required: true },
   location: { type: String, required: true },
   youtubeLink: String,
-  images: Array,
+  images: [{type: String}],
 });
 
 // create a model that conforms to the schema

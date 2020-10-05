@@ -6,15 +6,15 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   devServer: {
     publicPath: '/build',
     proxy: {
-      '/api/': 'http://localhost:3000'
+      '/api/': 'http://localhost:3000',
     },
-    port: 8080
+    port: 8080,
   },
   module: {
     rules: [
@@ -24,17 +24,15 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           }
         }]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.css$/, //changed to specify css instead of previous "catch all" test regex item including scss
         exclude: /(node_modules)/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       }
     ]
   }
-
 };
-

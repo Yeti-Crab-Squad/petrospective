@@ -17,8 +17,6 @@ const PostController = {
           log: 'Error creating post. Please check middleware syntax.',
         });
       } else {
-        // changed to.json
-        // res.status(200).send(newPost);
         res.status(200).json(newPost);
       }
     });
@@ -32,7 +30,7 @@ const PostController = {
             log: 'Error grabbing post feed. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(allPosts);
+          res.status(200).json(allPosts);
         }
       },
     );
