@@ -8,7 +8,7 @@ const ListItemController = {
       isChecked: false,
     }, (err, newItem) => {
       if (err) {
-         next({
+        next({
           log: 'Error creating list item. Please check middleware syntax.',
         });
       }
@@ -28,26 +28,24 @@ const ListItemController = {
           });
         } else {
           // setting the value to -1 sorts IDs descending, so posts from newest to oldest
-          // allItems.sort({ _id: -1 });
-          res.status(200).json(allItems);
+          allItems.sort({ _id: -1 });
+          res.status(200).send(allItems);
         }
       });
   },
 
   getItem(req, res, next) {
     const itemTitle = req.params.item;
-    console.log(itemTitle)
-
     ListItem.findOne({ listItem: itemTitle },
       (err, foundItem) => {
         if (err) {
-          return next({
+          next({
             log: 'Error getting list item. Please check middleware syntax.',
           });
         } else {
                    // changed to.json
       // res.status(200).send(newItem);
-          return res.status(200).json(foundItem);
+          res.status(200).json(foundItem);
         }
       });
   },
@@ -74,15 +72,15 @@ const ListItemController = {
   // deletes items from the bucket list
   deleteItem(req, res, next) {
     const itemTitle = req.params.item;
-    ListItem.deleteMany({
-     
+    ListItem.deleteOne({
+      listItem: itemTitle,
     }, (err) => {
       if (err) {
-        return next({
+        next({
           log: 'Error deleting list item. Please check middleware syntax.',
         });
       } else {
-        return res.sendStatus(200);
+        res.sendStatus(200);
       }
     });
   },
