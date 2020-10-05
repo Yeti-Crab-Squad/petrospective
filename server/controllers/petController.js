@@ -28,17 +28,12 @@ PetController.validateUser = (req, res, next) => {
  
   Pet.findOne({ username, password }, (err, user) => {
     if (err) {
-<<<<<<< HEAD
-=======
-      res.send('please enter a valid username and password.');
->>>>>>> main
       return next({
         log:
           'Error occured in PetController.validateUser middleware. Please check your syntax.',
         message: { err: err },
       });
     }
-<<<<<<< HEAD
     res.locals.user = user;
     console.log("This is in the middleware", res.locals.user)
     return next();
@@ -66,19 +61,6 @@ PetController.validateUser = (req, res, next) => {
     //     // res.status(200).redirect("/");
     //   }
     // });    
-=======
-    bcrypt.compare(password, user.password, (err, result) => {
-      if (result) {
-        console.log('success!');
-        //change this redirect name based on the frontend
-        res.send(200).redirect('/home');
-      } else {
-        //change this redirect name based on the frontend
-        res.send('Incorrect password. Please try again.');
-        res.send(200).redirect('/');
-      }
-    });
->>>>>>> main
   });
 };
 
