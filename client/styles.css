@@ -1,24 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Monoton&family=Shrikhand&display=swap");
+:root {
+  --yellow: #ffefa0;
+  --light-orange: #ffd57e;
+  --orange: #fca652;
+  --red: #ac4b1c;
+  --black: #222;
+  --white: #fff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: black; 
+  font-family: "Fredoka One", "Arial Narrow", Arial, sans-serif;
+  color: black;
 }
 
 .form-container {
-  width: 100%;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #222;
+  border-radius: 6px;
+  box-shadow: 10px 10px 5px 0px rgba(220, 220, 220, 1);
+}
+
+.input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.input-group {
-  margin-top: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: fit-content;
+.form-container h1 {
+  font-family: "Shrikhand", cursive;
+  margin-bottom: 10px;
 }
 
 .input-group input {
@@ -30,13 +51,18 @@
   border-radius: 4px;
 }
 
-.profile-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.login-btn {
+  background-color: #fca652;
+  border: 2px solid #fca652;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  /* cursor: pointer; */
 }
 
+.login-btn:hover {
+  background-color: #ffd57e;
+  border: 2px solid #ffd57e;
+}
 .profile {
   margin-top: 5px;
   display: flex;

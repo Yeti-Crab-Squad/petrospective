@@ -13,14 +13,13 @@ class Signup extends Component {
     this.validate = this.validate.bind(this);
   }
 
-  validate(){
-
+  validate() {
     const bio = document.getElementById("bio").value;
     const username = document.getElementById("signupUsername").value;
     const password = document.getElementById("signupPassword").value;
     const name = document.getElementById("name").value;
     const age = document.getElementById("age").value;
-    const profilePicture = 'this is a src for am img';
+    const profilePicture = "this is a src for am img";
 
     const body = {
       username,
@@ -28,86 +27,76 @@ class Signup extends Component {
       profilePicture,
       age,
       bio,
-      name
-    }
+      name,
+    };
 
-    fetch('/api/pet/signup', {
-      method:"POST",
-      headers:{
+    fetch("/api/pet/signup", {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
-    .then(res => {
-      console.log(res)
-    })
-    .then(data => {
-      this.setState({
-        loggedIn: true
+      .then((res) => {
+        console.log(res);
       })
-    })
-    .catch(err => console.log(`Error: ${err} `))
-
+      .then((data) => {
+        this.setState({
+          loggedIn: true,
+        });
+      })
+      .catch((err) => console.log(`Error: ${err} `));
   }
 
   render() {
     if (this.state.loggedIn) {
-      return <Redirect to="/feed" />;
+      return <Redirect to='/feed' />;
     }
 
     return (
-      <div className = 'form-container'>
-        <h1>Welcome !</h1>
-        <div>
-          <div className="input-group">
-            <label htmlFor="username">Name:</label>
-            <input 
-              type="text"
-              name="name"
-              placeholder="Name"
-              id="name"
-              ></input>
+      <div className='form-container'>
+        <h1>Petrospective</h1>
+        <div className='input-container'>
+          <div className='input-group'>
+            <label htmlFor='username'>Name:</label>
+            <input type='text' name='name' placeholder='Name' id='name'></input>
           </div>
-          <div className="input-group">
-            <label htmlFor="username">Age:</label>
-            <input 
-              type="string"
-              name="age"
-              placeholder="Age"
-              id="age"
-              ></input>
+          <div className='input-group'>
+            <label htmlFor='username'>Age:</label>
+            <input type='string' name='age' placeholder='Age' id='age'></input>
           </div>
-          <div className="input-group">
-            <label htmlFor="username">Username:</label>
-            <input 
-              type="text"
-              name="username"
-              placeholder="Username"
-              id="signupUsername"
-              ></input>
+          <div className='input-group'>
+            <label htmlFor='username'>Username:</label>
+            <input
+              type='text'
+              name='username'
+              placeholder='Username'
+              id='signupUsername'></input>
           </div>
-          <div className="input-group">
-            <label htmlFor="username">Password:</label>
-            <input 
-              type="text"
-              name="password"
-              placeholder="Password"
-              id="signupPassword"
-              ></input>
+          <div className='input-group'>
+            <label htmlFor='username'>Password:</label>
+            <input
+              type='text'
+              name='password'
+              placeholder='Password'
+              id='signupPassword'></input>
           </div>
-          <div className="input-group">
-            <label htmlFor="username">Bio:</label>
+          <div className='input-group'>
+            <label htmlFor='username'>Bio:</label>
             <textarea
-              type="text"
-              name="bio"
-              placeholder="Bio"
-              id="bio"
-              rows="4"
-              cols="50"
-              ></textarea>
+              type='text'
+              name='bio'
+              placeholder='Bio'
+              id='bio'
+              rows='4'
+              cols='50'></textarea>
           </div>
-          <input type="submit" value="Sign Up" className='login-btn' onClick={this.validate} />
-
+          <input
+            type='submit'
+            value='Sign Up'
+            className='login-btn'
+            onClick={this.validate}
+          />
         </div>
       </div>
     );

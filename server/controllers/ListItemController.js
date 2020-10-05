@@ -1,53 +1,51 @@
-const { ListItem } = require('../models/BucketListModels');
+const { ListItem } = require("../models/BucketListModels");
 
 const ListItemController = {
   // creates new list items for the bucket list
   addItem(req, res, next) {
-    ListItem.create({
-      listItem: req.body.listItem,
-      isChecked: false,
-      hasPost: false,
-    }, (err, newItem) => {
-      if (err) {
-        next({
-          log: 'Error creating list item. Please check middleware syntax.',
-        });
+    ListItem.create(
+      {
+        listItem: req.body.listItem,
+        isChecked: false,
+        hasPost: false,
+      },
+      (err, newItem) => {
+        if (err) {
+          next({
+            log: "Error creating list item. Please check middleware syntax.",
+          });
+        }
+        res.locals.items = newItem;
+        res.status(200).json(newItem);
       }
-      res.locals.items = newItem;
-      res.status(200).json(newItem);
-    });
+    );
   },
 
   getAllItems(req, res, next) {
-    ListItem.find({}).sort({ _id: -1 }).exec(
-      (err, allItems) => {
+    ListItem.find({})
+      .sort({ _id: -1 })
+      .exec((err, allItems) => {
         if (err) {
           next({
-            log: 'Error grabbing list items. Please check middleware syntax.',
+            log: "Error grabbing list items. Please check middleware syntax.",
           });
         } else {
-<<<<<<< HEAD
           res.status(200).send(allItems);
-=======
-          res.status(200).json(allItems);
->>>>>>> main
         }
-      },
-    );
+      });
   },
 
   getItem(req, res, next) {
     const itemTitle = req.params.item;
-    ListItem.findOne({ listItem: itemTitle },
-      (err, foundItem) => {
-        if (err) {
-          next({
-            log: 'Error getting list item. Please check middleware syntax.',
-          });
-        } else {
-          res.status(200).json(foundItem);
-        }
-     });
+    ListItem.findOne({ listItem: itemTitle }, (err, foundItem) => {
+      if (err) {
+        next({
+          log: "Error getting list item. Please check middleware syntax.",
+        });
+      } else {
+        res.status(200).json(foundItem);
+      }
+    });
   },
 
   updateItem(req, res, next) {
@@ -57,32 +55,38 @@ const ListItemController = {
       isChecked: req.body.isChecked,
       hasPost: req.body.hasPost,
     };
-    ListItem.findOneAndUpdate({ listItem: itemTitle }, update,
+    ListItem.findOneAndUpdate(
+      { listItem: itemTitle },
+      update,
       (err, updatedItem) => {
         if (err) {
           next({
-            log: 'Error updating list item. Please check middleware syntax.',
+            log: "Error updating list item. Please check middleware syntax.",
           });
         } else {
           res.status(200).json(updatedItem);
         }
-      });
+      }
+    );
   },
 
   // deletes items from the bucket list
   deleteItem(req, res, next) {
     const itemTitle = req.params.item;
-    ListItem.deleteOne({
-      listItem: itemTitle,
-    }, (err) => {
-      if (err) {
-        next({
-          log: 'Error deleting list item. Please check middleware syntax.',
-        });
-      } else {
-        res.sendStatus(200);
+    ListItem.deleteOne(
+      {
+        listItem: itemTitle,
+      },
+      (err) => {
+        if (err) {
+          next({
+            log: "Error deleting list item. Please check middleware syntax.",
+          });
+        } else {
+          res.sendStatus(200);
+        }
       }
-    });
+    );
   },
 };
 
