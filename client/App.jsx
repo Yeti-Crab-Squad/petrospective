@@ -10,6 +10,7 @@ import Bucketlist from './components/Bucketlist.jsx'
 const App = () => {
   return (
   <div>
+    <Bucketlist />
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />

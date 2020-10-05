@@ -55,7 +55,7 @@ const ListItemController = {
       isChecked: req.body.isChecked,
       hasPost: req.body.hasPost,
     };
-    ListItem.findOneAndUpdate({ listItem: itemTitle }, update,
+    ListItem.findOneAndUpdate({ listItem: itemTitle }, update, {new: true},
       (err, updatedItem) => {
         if (err) {
           next({
@@ -72,6 +72,20 @@ const ListItemController = {
     const itemTitle = req.params.item;
     ListItem.deleteOne({
       listItem: itemTitle,
+    }, (err) => {
+      if (err) {
+        next({
+          log: 'Error deleting list item. Please check middleware syntax.',
+        });
+      } else {
+        res.sendStatus(200);
+      }
+    });
+  },
+
+  deleteItem(req, res, next) {
+    const itemTitle = req.params.item;
+    ListItem.deleteMany({
     }, (err) => {
       if (err) {
         next({
