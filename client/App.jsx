@@ -3,30 +3,23 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import './styles.css';
 import Login from "./components/Login.jsx";
 // import Home from "./components/Home.jsx";
-// import Feed from "./containers/Feed.jsx";
+import Feed from "./components/Feed.jsx";
 import Signup from "./components/Signup.jsx";
 import Bucketlist from './components/Bucketlist.jsx'
 
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Login />
-        <Bucketlist />
-      </div>
-    )
-  }
+const App = () => {
+  return (
+  <div>
+    <Router>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/feed" component={Feed} /> 
+        <Route exact path="/" component={Login} />
+        </Switch>
+      </Router>
+  </div>
+  );
 }
 
 export default App;
-
-//<Router>
-//<Switch>
-//  <Route exact path="/login" component={Login} />
-//  <Route exact path="/signup" component={Signup} />
-//  {/* <Route exact path="/feed" component={Feed} /> */}
-//  <Route exact path="/" component={Login} />
-//  <div>404, dawg</div>
-//</Switch>
-//</Router>

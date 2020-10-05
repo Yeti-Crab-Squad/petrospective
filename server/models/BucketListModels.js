@@ -22,6 +22,7 @@ const postSchema = new Schema({
   // is the above a Google Maps URL or a string that tells Maps to make a map?
   youtubeLink: String,
   images: [{type: String}],
+
 });
 
 // create a model that conforms to the schema
