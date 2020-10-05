@@ -1,135 +1,159 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import { json } from 'express';
 import AddPostForm from './AddPostForm.jsx'
 import CompletedBucketlistItem from './CompletedBucketlistItem.jsx'
 import UncompletedBucketlistItem from './UncompletedBucketlistItem.jsx'
-import DisplayPost from './DisplayPost.jsx'
 
 function BucketlistItemDisplay(props) {
   const [state, setState] = useState(props.item);
-  setState(...state, state.images = [])
-  setState(...state, state.handleImagesChange = '')
+  const [newPost, setNewPost] = useState('')
+
+  const [images, setImages] = useState([])
+  const [imagesChange, setImagesChange] = useState('')
+
+  const [date, setDateChange] = useState('')
+  const [postDescription, setPostDescription] = useState('')
+  const [YTLink, setYTLink] = useState('')
+  const [GMLink, setGMLink] = useState('')
+
+
 
   function handleCheckedOffClick(listItem) {
-
-    useEffect(() => {
       const updatedItem = {
+        listItem: listItem,
         isChecked: true,
-        mustAddPost: true
+        hasPost: false
       }
       
       fetch(`/api/listItems/${listItem}`,{
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: updatedItem
+        body: JSON.stringify(updatedItem)
       })
       .then(res => res.json())
       .then(data => {
-        setState(...state, state.isChecked = true, state.mustAddPost = true)
+        // setState(state.isChecked = true, state.hasPost = false)
       })
       .catch(error => {
         console.log(error)
       })
-    })
-
-  
-
-
-
   }
 
   function handleDateChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
-
-    setState(...state, state.dateCompleted = newValue)
+    setDateChange(newValue)
   }
 
   function handleBodyOfPostChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.postDescription = newValue)
+    setPostDescription(newValue)
   }
 
   function handleYoutubeURLChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.youtubeLink = newValue)
+    setYTLink(newValue)
   }
 
-  function handleEmbedGoogleMaps(e) {
-    // NOT SURE YET HOW TO DO THIS ONE!!
-    e.preventDefault()
-    const newValue = e.target.value;
+  // function handleEmbedGoogleMaps(e) {
+  //   // NOT SURE YET HOW TO DO THIS ONE!!
+  //   e.preventDefault()
+  //   const newValue = e.target.value;
 
-    setState(...state, state.location = newValue)
-  }
+  //   setGMLink(newValue)
+  // }
 
-  function handleSubmitPostClick() {
+  function handleSubmitPostClick(listItem) {
+    const fullLink = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCyw8Q7SqmZ8RbKT6HgInw5Bcp93emrlNU&q=${GMLink}`
 
-    useEffect(() => {
+    console.log("LIST ITEM!!!!",listItem)
       const newPost = {
-        listItem: state.listItem,
-        date: state.dateCompleted,
-        postDescription: state.postDescription,
-        youtubeLink: state.youtubeLink,
-        location: state.googleLink,
-        images: state.images
+        listItem: listItem,
+        dateCompleted: date,
+        postDescription: postDescription,
+        youtubeLink: YTLink,
+        location: fullLink,
+        images: images
       }
 
-      fetch('/api/post/compelete-bucket-list-item', {
-        method: 'PUT',
+      fetch('/api/posts/', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: newPost
+        body: JSON.stringify(newPost)
       })
       .then(res => res.json())
       .then(data => {
+
         console.log(data)
-        setState(...state, state.mustAddPost = false)
+        // setState(...state, state.hasPost:true)
+
+        const updatedItem = {
+          listItem: listItem,
+          isChecked: true,
+          hasPost: true
+        }
+
+        fetch(`/api/listItems/${listItem}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedItem)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Have updated list item, HAS POST is TRUE')
+        })
+      
       })
       .catch(error => {
         console.log(error)
       })
-    })
+   
   }
 
   function handleGoogleLinkChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.googleLink = newValue)
+    setGMLink(newValue)
+
   }
 
   function handleAddImagesChange(e){
     e.preventDefault()
     const newValue = e.target.value;
-
-    setState(...state, state.handleImagesChange = newValue)
+    setImagesChange(newValue)
   }
 
   function handleAddImagesClick() {
-    setState(...state, state.images.push(state.handleImagesChange))
-    setState(...state, state.handleImagesChange = '');
-
+    setImages([...images, imagesChange])
+    // setImagesChange('')
+    
   }
 
+  // function handleDeleteClick(listItem) {
+
+  // }
 
 
-  if (state.isChecked && state.mustAddPost) {
+  // console.log(state)
+  if (state.isChecked && !state.hasPost) {
+    // console.log('THIS IS STATE',state)
 
     return (
       <div>
        <UncompletedBucketlistItem
-        listItem={props.listItem}
-        isChecked={props.isChecked}
-        key={props.key} 
+        listItem={state.listItem}
+        isChecked={state.isChecked}
         handleCheckedOffClick={handleCheckedOffClick}
       />
           <AddPostForm 
@@ -144,22 +168,21 @@ function BucketlistItemDisplay(props) {
     /> 
       </div>
     )
-  } else if (state.item.isChecked) {
+  } else if (state.isChecked) {
         return (
           <CompletedBucketlistItem 
-            key={props.key}
-            listItem={props.listItem}
-            dateCompleted={props.dateCompleted}
-            description={props.description}
+
+            listItem={state.listItem}
+            dateCompleted={state.dateCompleted}
+            description={state.description}
           />
         )
   } else {
 
     return (
       <UncompletedBucketlistItem
-        listItem={props.listItem}
-        isChecked={props.isChecked}
-        key={props.key} 
+        listItem={state.listItem}
+        isChecked={state.isChecked}
         
         handleCheckedOffClick={handleCheckedOffClick}
       />
@@ -171,21 +194,3 @@ function BucketlistItemDisplay(props) {
 export default BucketlistItemDisplay;
 
 
-// make only one dexcription
-
-// const newPost = {
-//   listItem,
-//   dateCompleted, 
-//   // some sort of access to an embedded google map
-//   // add a date the listItem was created
-//   dateCreated,
-//   location,
-//   postDescription,
-//   // maybe rename to originalDescription
-//   // REMOVE DESCRIPTION
-//   description,
-//   youtubeLink,
-//   hasCompleted,
-//   mustAddPost
-//   // Image upload parameter.
-// }

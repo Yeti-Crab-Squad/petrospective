@@ -1,4 +1,4 @@
-const Pet = require("../models/petModel.js");
+const Pet = require('../models/petModel.js');
 const PetController = {};
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require("bcrypt");
@@ -12,7 +12,7 @@ PetController.createPet = (req, res, next) => {
         if (err) {
           return next({
             log:
-              "Error occured in PetController.createPet middleware. Please check your syntax.",
+              'Error occured in PetController.createPet middleware. Please check your syntax.',
             message: { err: err },
           });
         }
@@ -28,12 +28,17 @@ PetController.validateUser = (req, res, next) => {
  
   Pet.findOne({ username, password }, (err, user) => {
     if (err) {
+<<<<<<< HEAD
+=======
+      res.send('please enter a valid username and password.');
+>>>>>>> main
       return next({
         log:
-          "Error occured in PetController.validateUser middleware. Please check your syntax.",
+          'Error occured in PetController.validateUser middleware. Please check your syntax.',
         message: { err: err },
       });
     }
+<<<<<<< HEAD
     res.locals.user = user;
     console.log("This is in the middleware", res.locals.user)
     return next();
@@ -61,18 +66,31 @@ PetController.validateUser = (req, res, next) => {
     //     // res.status(200).redirect("/");
     //   }
     // });    
+=======
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (result) {
+        console.log('success!');
+        //change this redirect name based on the frontend
+        res.send(200).redirect('/home');
+      } else {
+        //change this redirect name based on the frontend
+        res.send('Incorrect password. Please try again.');
+        res.send(200).redirect('/');
+      }
+    });
+>>>>>>> main
   });
 };
 
 PetController.updatePetBio = (req, res, next) => {
   // Changed this to access the username, not bio, because was set to username in the initial route
   // const { bio } = req.params;
-  const { username } = req.params
+  const { username } = req.params;
   const { updatedBio } = req.body;
   Pet.findOneAndUpdate(
     // changed to username
     // { name: bio },
-    { name: username},
+    { name: username },
     // changed name to bio
     // { name: updatedBio },
     { bio: updatedBio },
@@ -81,7 +99,7 @@ PetController.updatePetBio = (req, res, next) => {
       if (err) {
         return next({
           log:
-            "Error occured in PetController.updatePetName middleware. Please check your syntax.",
+            'Error occured in PetController.updatePetName middleware. Please check your syntax.',
           message: { err: err },
         });
       }
@@ -97,7 +115,7 @@ PetController.deletePet = (req, res, next) => {
     if (err) {
       return next({
         log:
-          "Error occured in PetController.deletePet middleware. Please check your syntax.",
+          'Error occured in PetController.deletePet middleware. Please check your syntax.',
         message: { err: err },
       });
     }

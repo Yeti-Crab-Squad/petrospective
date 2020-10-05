@@ -6,15 +6,15 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
 
   devServer: {
     publicPath: '/build',
     proxy: {
-      '/api/': 'http://localhost:3000'
+      '/api/': 'http://localhost:3000',
     },
-    port: 8080
+    port: 8080,
   },
   module: {
     rules: [
@@ -36,4 +36,3 @@ module.exports = {
     ]
   }
 };
-
