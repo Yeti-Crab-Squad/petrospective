@@ -27,6 +27,7 @@ PetController.validateUser = (req, res, next) => {
   const { username, password } = req.params;
   Pet.find({ username, password }, (err, user) => {
     if (err) {
+      res.send("please enter a valid username and password.");
       return next({
         log:
           "Error occured in PetController.validateUser middleware. Please check your syntax.",
