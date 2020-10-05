@@ -10,13 +10,48 @@ class Signup extends Component {
       failedLogin: false,
     };
 
-    // this.validate = this.validate.bind(this);
+    this.validate = this.validate.bind(this);
+  }
+
+  validate(){
+
+    const bio = document.getElementById("bio").value;
+    const username = document.getElementById("signupUsername").value;
+    const password = document.getElementById("signupPassword").value;
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const profilePicture = 'this is a src for am img';
+
+    const body = {
+      username,
+      password,
+      profilePicture,
+      age,
+      bio,
+      name
+    }
+
+    fetch('/api/pet/signup', {
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        loggedIn: true
+      })
+    })
+    .catch(err => console.log(`Error: ${err} `))
+
   }
 
   render() {
-    // if (this.state.loggedIn) {
-    //   return <Redirect to="/feed" />;
-    // }
+    if (this.state.loggedIn) {
+      // return <Redirect to="/feed" />;
+    }
 
     return (
       <div className = 'form-container'>
@@ -28,14 +63,16 @@ class Signup extends Component {
               type="text"
               name="name"
               placeholder="Name"
+              id="name"
               ></input>
           </div>
           <div className="input-group">
             <label htmlFor="username">Age:</label>
             <input 
-              type="text"
+              type="string"
               name="age"
               placeholder="Age"
+              id="age"
               ></input>
           </div>
           <div className="input-group">
@@ -44,7 +81,7 @@ class Signup extends Component {
               type="text"
               name="username"
               placeholder="Username"
-              id="username"
+              id="signupUsername"
               ></input>
           </div>
           <div className="input-group">
@@ -53,12 +90,21 @@ class Signup extends Component {
               type="text"
               name="password"
               placeholder="Password"
-              id="password"
+              id="signupPassword"
               ></input>
           </div>
-          <button value="Sign Up" className='login-btn'>
-            Sign Up
-          </button>
+          <div className="input-group">
+            <label htmlFor="username">Bio:</label>
+            <textarea
+              type="text"
+              name="bio"
+              placeholder="Bio"
+              id="bio"
+              rows="4"
+              cols="50"
+              ></textarea>
+          </div>
+          <input type="submit" value="Sign Up" className='login-btn' onClick={this.validate} />
 
         </div>
       </div>

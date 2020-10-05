@@ -12,13 +12,42 @@ class Login extends Component {
       //object -- all the info
     };
 
-    // this.validate = this.validate.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
+  validate(){
+   const username = document.getElementById("username").value;
+   const password = document.getElementById("password").value;
+
+  const body = {
+    username,
+    password
+  }
+
+  // console.log("This is outside of the POST", body)
+
+  fetch('/api/pet/login', {
+    method:"POST",
+    headers:{
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body)
+  })
+  .then(res => res.text())
+  .then(data => {
+    this.setState({
+      loggedIn: true
+    })
+  })
+  .catch(err => console.log(`Error: ${err} `))
+  }
+
+
+
   render() {
-    // if (this.state.loggedIn) {
-    //   return <Redirect to="/feed" />;
-    // }
+    if (this.state.loggedIn) {
+      // return <Redirect to="/feed" />;
+    }
 
     return (
       <div className = 'form-container'>
@@ -42,10 +71,8 @@ class Login extends Component {
               id="password"
               ></input>
           </div>
-          <button value="Login" className='login-btn'>
-            Log In
-          </button>
-
+          <input type="submit" value="Login" className='login-btn' onClick={this.validate} />
+          <Link to="signup">Sign up here!</Link>
         </div>
       </div>
     );

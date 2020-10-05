@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
     status: 400,
     message: { err: "Uh-oh, error time, baby! :)" },
   };
-  const errorObj = Object.assign({}, defaultErr, err);
+  const errorObj = Object.assign({}, defaultError, err);
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
