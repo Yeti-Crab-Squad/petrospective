@@ -16,11 +16,9 @@ const ListItem = mongoose.model('listItem', listItemSchema);
 // create schema for bucket list posts
 const postSchema = new Schema({
   listItem: { type: String, required: true },
-  datePosted: { type: String, required: true },
   dateCompleted: { type: String, required: true },
   postDescription: { type: String, required: true },
   location: { type: String, required: true },
-  // is the above a Google Maps URL or a string that tells Maps to make a map?
   youtubeLink: String,
   images: Array,
 });

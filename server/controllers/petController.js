@@ -1,7 +1,7 @@
 const Pet = require("../models/petModel.js");
 const PetController = {};
 const SALT_WORK_FACTOR = 10;
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 PetController.createPet = (req, res, next) => {
   const { username, password, profilePicture, age, bio, name } = req.body;

@@ -6,6 +6,7 @@ const ListItemController = {
     ListItem.create({
       listItem: req.body.listItem,
       isChecked: false,
+      hasPost: false,
     }, (err, newItem) => {
       if (err) {
         next({
@@ -13,25 +14,22 @@ const ListItemController = {
         });
       }
       res.locals.items = newItem;
-         // changed to.json
-      // res.status(200).send(newItem);
       res.status(200).json(newItem);
     });
   },
 
   getAllItems(req, res, next) {
-    ListItem.find({},
+    ListItem.find({}).sort({ _id: -1 }).exec(
       (err, allItems) => {
         if (err) {
           next({
             log: 'Error grabbing list items. Please check middleware syntax.',
           });
         } else {
-          // setting the value to -1 sorts IDs descending, so posts from newest to oldest
-          allItems.sort({ _id: -1 });
           res.status(200).send(allItems);
         }
-      });
+      },
+    );
   },
 
   getItem(req, res, next) {
@@ -43,8 +41,6 @@ const ListItemController = {
             log: 'Error getting list item. Please check middleware syntax.',
           });
         } else {
-                   // changed to.json
-      // res.status(200).send(newItem);
           res.status(200).json(foundItem);
         }
       });

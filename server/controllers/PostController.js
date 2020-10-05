@@ -4,15 +4,13 @@ const PostController = {
   // creates new posts for your feed
 
   addPost(req, res, next) {
-
-     Post.create({
+    Post.create({
       listItem: req.body.listItem,
-      date: req.body.date,
+      dateCompleted: req.body.dateCompleted,
       postDescription: req.body.postDescription,
       location: req.body.location,
-      // is the above a Google Maps URL or a string that tells Maps to make a map?
       youtubeLink: req.body.youtubeLink,
-      // imageUpload: Come back to this. Use GridFS to store images
+      images: req.body.images,
     }, (err, newPost) => {
       if (err) {
         next({
@@ -25,20 +23,19 @@ const PostController = {
       }
     });
   },
-  
+
   getAllPosts(req, res, next) {
-    Post.find({},
+    Post.find({}).sort({ _id: -1 }).exec(
       (err, allPosts) => {
         if (err) {
           next({
             log: 'Error grabbing post feed. Please check middleware syntax.',
           });
         } else {
-          // setting the value to -1 sorts IDs descending, so posts from newest to oldest
-          allPosts.sort({ _id: -1 });
           res.status(200).send(allPosts);
         }
-      });
+      },
+    );
   },
 
   // displays posts in database
@@ -51,8 +48,6 @@ const PostController = {
             log: 'Error getting post. Please check middleware syntax.',
           });
         } else {
-             // changed to.json
-        // res.status(200).send(newPost);
           res.status(200).json(foundPost);
         }
       });
@@ -63,12 +58,11 @@ const PostController = {
     const postTitle = req.params.title;
     const update = {
       listItem: req.body.listItem,
-      datePosted: req.body.datePosted,
       dateCompleted: req.body.dateCompleted,
       postDescription: req.body.postDescription,
       location: req.body.location,
       youtubeLink: req.body.youtubeLink,
-      // imageUpload: req.body.imageUpload,
+      images: req.body.images,
     };
     Post.findOneAndUpdate({ listItem: postTitle }, update,
       (err, updatedPost) => {
@@ -77,8 +71,6 @@ const PostController = {
             log: 'Error updating post. Please check middleware syntax.',
           });
         } else {
-             // changed to.json
-        // res.status(200).send(newPost);
           res.status(200).json(updatedPost);
         }
       });
