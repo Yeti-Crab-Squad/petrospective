@@ -9,6 +9,5 @@ router.get('/', listItemController.getAllItems);
 router.get('/:item', listItemController.getItem);
 router.put('/:item', listItemController.updateItem);
 router.delete('/:item', listItemController.deleteItem);
-router.delete('/', listItemController.deleteItem);
 
 module.exports = router;
