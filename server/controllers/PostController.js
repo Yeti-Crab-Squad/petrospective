@@ -36,7 +36,7 @@ const PostController = {
             log: 'Error grabbing post feed. Please check middleware syntax.',
           });
         } else {
-          res.status(200).send(allPosts);
+          res.status(200).json(allPosts);
         }
       },
     );
