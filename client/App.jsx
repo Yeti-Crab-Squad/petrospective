@@ -5,23 +5,8 @@ import Login from "./components/Login.jsx";
 // import Home from "./components/Home.jsx";
 import Feed from "./components/Feed.jsx";
 import Signup from "./components/Signup.jsx";
-import Profile from "./components/Profile.jsx";
 import Bucketlist from './components/Bucketlist.jsx'
 
-<<<<<<< HEAD
-=======
-
-<<<<<<< HEAD
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Signup />
-      </div>
-    )
-  }
-=======
->>>>>>> main
 const App = () => {
   return (
   <div>
@@ -35,11 +20,6 @@ const App = () => {
       </Router>
   </div>
   );
-<<<<<<< HEAD
-=======
->>>>>>> a372d4370fd321069eee56f0da7a2aceb0405995
->>>>>>> main
 }
 
 export default App;
-
