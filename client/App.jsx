@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div>
         <Login />
-        {/* <Bucketlist /> */}
+        <Bucketlist />
       </div>
     )
   }

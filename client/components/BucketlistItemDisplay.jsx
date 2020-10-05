@@ -1,23 +1,28 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import { json } from 'express';
 import AddPostForm from './AddPostForm.jsx'
 import CompletedBucketlistItem from './CompletedBucketlistItem.jsx'
 import UncompletedBucketlistItem from './UncompletedBucketlistItem.jsx'
-import DisplayPost from './DisplayPost.jsx'
 
 function BucketlistItemDisplay(props) {
   const [state, setState] = useState(props.item);
-  setState(...state, state.images = [])
-  setState(...state, state.handleImagesChange = '')
+  const [newPost, setNewPost] = useState('')
+  useEffect(() => {
+    setState({...state, images: [], handleImagesChange: ''})
+
+  },[])
+
+  console.log(state)
+ 
 
   function handleCheckedOffClick(listItem) {
-
-    useEffect(() => {
+   
       const updatedItem = {
         isChecked: true,
         mustAddPost: true
       }
+
+      console.log(listItem)
       
       fetch(`/api/listItems/${listItem}`,{
         method: 'POST',
@@ -28,38 +33,32 @@ function BucketlistItemDisplay(props) {
       })
       .then(res => res.json())
       .then(data => {
-        setState(...state, state.isChecked = true, state.mustAddPost = true)
+        setState(state.isChecked = true, state.mustAddPost = true)
       })
       .catch(error => {
         console.log(error)
       })
-    })
-
-  
-
-
-
   }
 
   function handleDateChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.dateCompleted = newValue)
+    setState(state.dateCompleted = newValue)
   }
 
   function handleBodyOfPostChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.postDescription = newValue)
+    setState(state.postDescription = newValue)
   }
 
   function handleYoutubeURLChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.youtubeLink = newValue)
+    setState(state.youtubeLink = newValue)
   }
 
   function handleEmbedGoogleMaps(e) {
@@ -67,7 +66,7 @@ function BucketlistItemDisplay(props) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.location = newValue)
+    setState(state.location = newValue)
   }
 
   function handleSubmitPostClick() {
@@ -83,7 +82,7 @@ function BucketlistItemDisplay(props) {
       }
 
       fetch('/api/post/compelete-bucket-list-item', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -92,7 +91,7 @@ function BucketlistItemDisplay(props) {
       .then(res => res.json())
       .then(data => {
         console.log(data)
-        setState(...state, state.mustAddPost = false)
+        setState(state.mustAddPost = false)
       })
       .catch(error => {
         console.log(error)
@@ -104,19 +103,19 @@ function BucketlistItemDisplay(props) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.googleLink = newValue)
+    setState(state.googleLink = newValue)
   }
 
   function handleAddImagesChange(e){
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(...state, state.handleImagesChange = newValue)
+    setState(state.handleImagesChange = newValue)
   }
 
   function handleAddImagesClick() {
-    setState(...state, state.images.push(state.handleImagesChange))
-    setState(...state, state.handleImagesChange = '');
+    setState(state.images.push(state.handleImagesChange))
+    setState(state.handleImagesChange = '');
 
   }
 
@@ -127,9 +126,8 @@ function BucketlistItemDisplay(props) {
     return (
       <div>
        <UncompletedBucketlistItem
-        listItem={props.listItem}
-        isChecked={props.isChecked}
-        key={props.key} 
+        listItem={state.listItem}
+        isChecked={state.isChecked}
         handleCheckedOffClick={handleCheckedOffClick}
       />
           <AddPostForm 
@@ -144,22 +142,21 @@ function BucketlistItemDisplay(props) {
     /> 
       </div>
     )
-  } else if (state.item.isChecked) {
+  } else if (state.isChecked) {
         return (
           <CompletedBucketlistItem 
-            key={props.key}
-            listItem={props.listItem}
-            dateCompleted={props.dateCompleted}
-            description={props.description}
+
+            listItem={state.listItem}
+            dateCompleted={state.dateCompleted}
+            description={state.description}
           />
         )
   } else {
 
     return (
       <UncompletedBucketlistItem
-        listItem={props.listItem}
-        isChecked={props.isChecked}
-        key={props.key} 
+        listItem={state.listItem}
+        isChecked={state.isChecked}
         
         handleCheckedOffClick={handleCheckedOffClick}
       />
@@ -171,21 +168,3 @@ function BucketlistItemDisplay(props) {
 export default BucketlistItemDisplay;
 
 
-// make only one dexcription
-
-// const newPost = {
-//   listItem,
-//   dateCompleted, 
-//   // some sort of access to an embedded google map
-//   // add a date the listItem was created
-//   dateCreated,
-//   location,
-//   postDescription,
-//   // maybe rename to originalDescription
-//   // REMOVE DESCRIPTION
-//   description,
-//   youtubeLink,
-//   hasCompleted,
-//   mustAddPost
-//   // Image upload parameter.
-// }
