@@ -15,6 +15,7 @@ class Login extends Component {
     this.validate = this.validate.bind(this);
   }
 
+
   validate(){
    const username = document.getElementById("username").value;
    const password = document.getElementById("password").value;
@@ -26,27 +27,27 @@ class Login extends Component {
 
   // console.log("This is outside of the POST", body)
 
-  fetch('/api/pet/login', {
-    method:"POST",
-    headers:{
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body)
-  })
-  .then(res => res.text())
-  .then(data => {
-    this.setState({
-      loggedIn: true
+    fetch('/api/pet/login', {
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body)
     })
-  })
-  .catch(err => console.log(`Error: ${err} `))
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        loggedIn: true
+      })
+    })
+    .catch(err => console.log(`Error: ${err} `))
   }
 
 
 
   render() {
     if (this.state.loggedIn) {
-      // return <Redirect to="/feed" />;
+      return <Redirect to="/feed" />;
     }
 
     return (

@@ -30,6 +30,20 @@
   border-radius: 4px;
 }
 
+.profile-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+}
 
 .login-btn {
   font-size: 1.25em;

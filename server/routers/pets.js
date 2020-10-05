@@ -8,7 +8,8 @@ router.post("/signup",petController.createPet, (req, res) => {
 });
 
 router.post("/login", petController.validateUser, (req, res) => {
-  res.status(200).json(res.locals.pets);
+  console.log("This is in the /login ",res.locals.user)
+  res.status(200).json(res.locals.user);
 });
 
 router.put("/:username", petController.updatePetBio, (req, res) => {

@@ -38,7 +38,9 @@ class Signup extends Component {
       },
       body: JSON.stringify(body)
     })
-    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+    })
     .then(data => {
       this.setState({
         loggedIn: true
@@ -50,7 +52,7 @@ class Signup extends Component {
 
   render() {
     if (this.state.loggedIn) {
-      // return <Redirect to="/feed" />;
+      return <Redirect to="/feed" />;
     }
 
     return (

@@ -25,16 +25,18 @@ PetController.createPet = (req, res, next) => {
 
 PetController.validateUser = (req, res, next) => {
   const { username, password } = req.body;
-  Pet.find({ username, password }, (err, user) => {
+ 
+  Pet.findOne({ username, password }, (err, user) => {
     if (err) {
-      // res.send("please enter a valid username and password.");
       return next({
         log:
           "Error occured in PetController.validateUser middleware. Please check your syntax.",
         message: { err: err },
       });
     }
-
+    res.locals.user = user;
+    console.log("This is in the middleware", res.locals.user)
+    return next();
     // bcrypt.compare(password, user.password, (err, result) => {
     //   console.log(`This is in brcypt`)
     //   if(err) {
@@ -58,11 +60,8 @@ PetController.validateUser = (req, res, next) => {
     //     // res.send("Incorrect password. Please try again.");
     //     // res.status(200).redirect("/");
     //   }
-    // });
-    res.locals.pets = user;
+    // });    
   });
-  
-  return next();
 };
 
 PetController.updatePetBio = (req, res, next) => {
