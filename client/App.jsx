@@ -8,15 +8,19 @@ import Signup from "./components/Signup.jsx";
 import Bucketlist from './components/Bucketlist.jsx'
 
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Feed />
-        {/* <Bucketlist /> */}
-      </div>
-    )
-  }
+const App = () => {
+  return (
+  <div>
+    <Router>
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/feed" component={Feed} /> 
+        <Route exact path="/" component={Login} />
+        </Switch>
+      </Router>
+  </div>
+  );
 }
 
 export default App;

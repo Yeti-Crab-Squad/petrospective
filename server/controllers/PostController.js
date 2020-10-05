@@ -7,13 +7,14 @@ const PostController = {
 
      Post.create({
       listItem: req.body.listItem,
-      datePosted: req.body.datePosted,
       dateCompleted: req.body.dateCompleted,
       postDescription: req.body.postDescription,
       location: req.body.location,
       // is the above a Google Maps URL or a string that tells Maps to make a map?
       youtubeLink: req.body.youtubeLink,
-      images:  req.body.images
+      images: req.body.images
+      // imageUpload: Come back to this. Use GridFS to store images
+
     }, (err, newPost) => {
       if (err) {
         next({
