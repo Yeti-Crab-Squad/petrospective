@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/andrew-lovato/petrospective#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",

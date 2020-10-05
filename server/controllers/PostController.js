@@ -7,11 +7,12 @@ const PostController = {
 
      Post.create({
       listItem: req.body.listItem,
-      date: req.body.date,
+      dateCompleted: req.body.dateCompleted,
       postDescription: req.body.postDescription,
       location: req.body.location,
       // is the above a Google Maps URL or a string that tells Maps to make a map?
       youtubeLink: req.body.youtubeLink,
+      images: req.body.images
       // imageUpload: Come back to this. Use GridFS to store images
     }, (err, newPost) => {
       if (err) {
@@ -25,8 +26,21 @@ const PostController = {
       }
     });
   },
-
   
+  getAllPosts(req, res, next) {
+    Post.find({},
+      (err, allPosts) => {
+        if (err) {
+          next({
+            log: 'Error grabbing post feed. Please check middleware syntax.',
+          });
+        } else {
+          // setting the value to -1 sorts IDs descending, so posts from newest to oldest
+          // allPosts.sort({ _id: -1 });
+          res.status(200).send(allPosts);
+        }
+      });
+  },
 
   // displays posts in database
   getPost(req, res, next) {
@@ -50,7 +64,8 @@ const PostController = {
     const postTitle = req.params.title;
     const update = {
       listItem: req.body.listItem,
-      date: req.body.date,
+      datePosted: req.body.datePosted,
+      dateCompleted: req.body.dateCompleted,
       postDescription: req.body.postDescription,
       location: req.body.location,
       youtubeLink: req.body.youtubeLink,

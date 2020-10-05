@@ -7,33 +7,34 @@ import UncompletedBucketlistItem from './UncompletedBucketlistItem.jsx'
 function BucketlistItemDisplay(props) {
   const [state, setState] = useState(props.item);
   const [newPost, setNewPost] = useState('')
-  useEffect(() => {
-    setState({...state, images: [], handleImagesChange: ''})
 
-  },[])
+  const [images, setImages] = useState([])
+  const [imagesChange, setImagesChange] = useState('')
 
-  console.log(state)
- 
+  const [date, setDateChange] = useState('')
+  const [postDescription, setPostDescription] = useState('')
+  const [YTLink, setYTLink] = useState('')
+  const [GMLink, setGMLink] = useState('')
+
+
 
   function handleCheckedOffClick(listItem) {
-   
       const updatedItem = {
+        listItem: listItem,
         isChecked: true,
-        mustAddPost: true
+        hasPost: false
       }
-
-      console.log(listItem)
       
       fetch(`/api/listItems/${listItem}`,{
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: updatedItem
+        body: JSON.stringify(updatedItem)
       })
       .then(res => res.json())
       .then(data => {
-        setState(state.isChecked = true, state.mustAddPost = true)
+        // setState(state.isChecked = true, state.hasPost = false)
       })
       .catch(error => {
         console.log(error)
@@ -43,85 +44,110 @@ function BucketlistItemDisplay(props) {
   function handleDateChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
-
-    setState(state.dateCompleted = newValue)
+    setDateChange(newValue)
   }
 
   function handleBodyOfPostChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(state.postDescription = newValue)
+    setPostDescription(newValue)
   }
 
   function handleYoutubeURLChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(state.youtubeLink = newValue)
+    setYTLink(newValue)
   }
 
-  function handleEmbedGoogleMaps(e) {
-    // NOT SURE YET HOW TO DO THIS ONE!!
-    e.preventDefault()
-    const newValue = e.target.value;
+  // function handleEmbedGoogleMaps(e) {
+  //   // NOT SURE YET HOW TO DO THIS ONE!!
+  //   e.preventDefault()
+  //   const newValue = e.target.value;
 
-    setState(state.location = newValue)
-  }
+  //   setGMLink(newValue)
+  // }
 
-  function handleSubmitPostClick() {
+  function handleSubmitPostClick(listItem) {
+    const fullLink = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCyw8Q7SqmZ8RbKT6HgInw5Bcp93emrlNU&q=${GMLink}`
 
-    useEffect(() => {
+    console.log("LIST ITEM!!!!",listItem)
       const newPost = {
-        listItem: state.listItem,
-        date: state.dateCompleted,
-        postDescription: state.postDescription,
-        youtubeLink: state.youtubeLink,
-        location: state.googleLink,
-        images: state.images
+        listItem: listItem,
+        dateCompleted: date,
+        postDescription: postDescription,
+        youtubeLink: YTLink,
+        location: fullLink,
+        images: images
       }
 
-      fetch('/api/post/compelete-bucket-list-item', {
+      fetch('/api/posts/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: newPost
+        body: JSON.stringify(newPost)
       })
       .then(res => res.json())
       .then(data => {
+
         console.log(data)
-        setState(state.mustAddPost = false)
+        // setState(...state, state.hasPost:true)
+
+        const updatedItem = {
+          listItem: listItem,
+          isChecked: true,
+          hasPost: true
+        }
+
+        fetch(`/api/listItems/${listItem}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(updatedItem)
+        })
+        .then(res => res.json())
+        .then(data => {
+          console.log('Have updated list item, HAS POST is TRUE')
+        })
+      
       })
       .catch(error => {
         console.log(error)
       })
-    })
+   
   }
 
   function handleGoogleLinkChange(e) {
     e.preventDefault()
     const newValue = e.target.value;
 
-    setState(state.googleLink = newValue)
+    setGMLink(newValue)
+
   }
 
   function handleAddImagesChange(e){
     e.preventDefault()
     const newValue = e.target.value;
-
-    setState(state.handleImagesChange = newValue)
+    setImagesChange(newValue)
   }
 
   function handleAddImagesClick() {
-    setState(state.images.push(state.handleImagesChange))
-    setState(state.handleImagesChange = '');
-
+    setImages([...images, imagesChange])
+    // setImagesChange('')
+    
   }
 
+  // function handleDeleteClick(listItem) {
+
+  // }
 
 
-  if (state.isChecked && state.mustAddPost) {
+  // console.log(state)
+  if (state.isChecked && !state.hasPost) {
+    // console.log('THIS IS STATE',state)
 
     return (
       <div>

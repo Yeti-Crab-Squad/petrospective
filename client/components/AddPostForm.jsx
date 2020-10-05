@@ -3,7 +3,7 @@ import React from 'react';
 function AddPostForm(props) {
   return (
     <div>
-      {/* research ways to formalize Date input data */}
+<p>THIS IS PROPS STATE LISTE ITEM:{props.state.listItem}</p>
     <label htmlFor="completionDate">Date Completed:</label>
     <input value={props.state.dateCompleted}  onChange={props.handleDateChange} id='completionDate' type="text"/>
     <label htmlFor="postTextArea">Post Body:</label>
@@ -15,7 +15,7 @@ function AddPostForm(props) {
     <label htmlFor="addImages">Add Images</label>
     <input id='addImages' value={props.handleImagesChange} onChange={props.handleAddImagesChange} type="text"/>
     <button onClick={props.handleAddImagesClick}>Add New Image</button>
-    <button onClick={props.handleSubmitPostClick}>Submit Post!</button>
+    <button onClick={() => props.handleSubmitPostClick(props.state.listItem)}>Submit Post!</button>
   </div>
   )
 }
