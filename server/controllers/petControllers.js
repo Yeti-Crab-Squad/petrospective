@@ -7,7 +7,7 @@ PetController.createPet = (req, res, next) => {
   const { username, password, profilePicture, age, bio, name } = req.body;
   bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
     Pet.create(
-      { username, hash, profilePicture, age, bio, name },
+      { username, password: hash, profilePicture, age, bio, name },
       (err, pet) => {
         if (err) {
           return next({
@@ -40,6 +40,7 @@ PetController.validateUser = (req, res, next) => {
         //change this redirect name based on the frontend
         res.send(200).redirect("/home");
       } else {
+        //change this redirect name based on the frontend
         res.send("Incorrect password. Please try again.");
         res.send(200).redirect("/");
       }
