@@ -3,17 +3,22 @@ import React from 'react';
 function AddPostForm(props) {
   return (
     <div>
-    <label htmlFor="completionDate"></label>
+      {/* research ways to formalize Date input data */}
+    <label htmlFor="completionDate">Date Completed:</label>
     <input value={props.state.dateCompleted}  onChange={props.handleDateChange} id='completionDate' type="text"/>
+    <label htmlFor="postTextArea">Post Body:</label>
     <textarea onChange={props.handleBodyOfPostChange} name="" id="postTextArea" cols="30" rows="5"></textarea>
     <label htmlFor="youtubeURL">Youtube Link</label>
     <input onChange={props.handleYoutubeURLChange} type="text"/>
-    {/* EMBED GOOGLE MAPS SOMEHOW */}
-    {/* <label htmlFor="gooleMapsUrl">Google Maps</label>
-    <input onChange={handleEmbedGoogleMaps} type="text"/> */}
+    <label htmlFor="googleLink">Google Map Link</label>
+    <input id='googleLink' onChange={props.handleGoogleLinkChange} type="text"/>
+    <label htmlFor="addImages">Add Images</label>
+    <input id='addImages' value={props.handleImagesChange} onChange={props.handleAddImagesChange} type="text"/>
+    <button onClick={props.handleAddImagesClick}>Add New Image</button>
     <button onClick={props.handleSubmitPostClick}>Submit Post!</button>
   </div>
   )
 }
+
 
 export default AddPostForm;
