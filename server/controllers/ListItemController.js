@@ -8,7 +8,7 @@ const ListItemController = {
       isChecked: false,
     }, (err, newItem) => {
       if (err) {
-        next({
+         next({
           log: 'Error creating list item. Please check middleware syntax.',
         });
       }
@@ -24,13 +24,13 @@ const ListItemController = {
     ListItem.findOne({ listItem: itemTitle },
       (err, foundItem) => {
         if (err) {
-          next({
+          return next({
             log: 'Error getting list item. Please check middleware syntax.',
           });
         } else {
                    // changed to.json
       // res.status(200).send(newItem);
-          res.status(200).json(foundItem);
+          return res.status(200).json(foundItem);
         }
       });
   },
@@ -42,11 +42,11 @@ const ListItemController = {
       listItem: itemTitle,
     }, (err) => {
       if (err) {
-        next({
+        return next({
           log: 'Error deleting list item. Please check middleware syntax.',
         });
       } else {
-        res.sendStatus(200);
+        return res.sendStatus(200);
       }
     });
   },

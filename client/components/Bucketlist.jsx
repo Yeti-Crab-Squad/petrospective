@@ -6,18 +6,18 @@ function Bucketlist(props) {
   const [bucketlistItems, setBucketlistItems] = useState();
   const [newItem, setNewItem] = useState('')
 
-  useEffect(() => {
-    fetch('/api/listItems')
-      .then(res => res.json())
-      .then(data => {
-        setBucketlistItems(data)
-      })
-  })
+  // useEffect(() => {
+  //   fetch('/api/listItems')
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setBucketlistItems(data)
+  //     })
+  // })
 
   function handleNewItemClick() {
 
     const newListItem = {
-      listItem: listItem,
+      listItem: newItem,
     
     }
   
@@ -26,13 +26,12 @@ function Bucketlist(props) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: newListItem
+      body: JSON.stringify(newListItem)
     })
     .then(res => res.json())
     .then(data => {
       setNewItem('')
 
-     
         fetch('/api/listItems')
         .then(res => res.json())
         .then(data => {
