@@ -5,6 +5,7 @@ const postController = require('../controllers/PostController');
 const router = express.Router();
 
 router.post('/', postController.addPost);
+router.get('/', postController.getAllPosts);
 router.get('/:title', postController.getPost);
 router.put('/:title', postController.updatePost);
 router.delete('/:title', postController.deletePost);

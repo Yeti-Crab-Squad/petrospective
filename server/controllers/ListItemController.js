@@ -17,6 +17,21 @@ const ListItemController = {
     });
   },
 
+  getAllItems(req, res, next) {
+    ListItem.find({},
+      (err, allItems) => {
+        if (err) {
+          next({
+            log: 'Error grabbing list items. Please check middleware syntax.',
+          });
+        } else {
+          // setting the value to -1 sorts IDs descending, so posts from newest to oldest
+          allItems.sort({ _id: -1 });
+          res.status(200).send(allItems);
+        }
+      });
+  },
+
   getItem(req, res, next) {
     const itemTitle = req.params.item;
     ListItem.findOne({ listItem: itemTitle },
@@ -27,6 +42,25 @@ const ListItemController = {
           });
         } else {
           res.status(200).send(foundItem);
+        }
+      });
+  },
+
+  updateItem(req, res, next) {
+    const itemTitle = req.params.item;
+    const update = {
+      listItem: req.body.listItem,
+      isChecked: req.body.isChecked,
+      hasPost: req.body.hasPost,
+    };
+    ListItem.findOneAndUpdate({ listItem: itemTitle }, update,
+      (err, updatedItem) => {
+        if (err) {
+          next({
+            log: 'Error updating list item. Please check middleware syntax.',
+          });
+        } else {
+          res.status(200).send(updatedItem);
         }
       });
   },
