@@ -29,9 +29,9 @@ module.exports = {
         }]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.css$/, //changed to specify css instead of previous "catch all" test regex item including scss
         exclude: /(node_modules)/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       }
     ]
   }

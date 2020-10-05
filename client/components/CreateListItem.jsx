@@ -6,7 +6,7 @@ function CreateListItem(props) {
     <div>
       <label htmlFor="createBucketlistItem">Create New Bucket List Item</label>
       <input id='createBucketlistItem' onChange={props.handleNewItemChange} value={props.newItem} type="text"/>
-      <submit onClick={props.handleNewItemClick}></submit>
+      <button onClick={props.handleNewItemClick}>Add New Item to Bucket List</button>
     </div>
   )
 }
