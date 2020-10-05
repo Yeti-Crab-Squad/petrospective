@@ -28,7 +28,7 @@ const ListItemController = {
           });
         } else {
           // setting the value to -1 sorts IDs descending, so posts from newest to oldest
-          allItems.sort({ _id: -1 });
+          // allItems.sort({ _id: -1 });
           res.status(200).send(allItems);
         }
       });
