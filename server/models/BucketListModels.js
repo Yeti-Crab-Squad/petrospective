@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const listItemSchema = new Schema({
   listItem: { type: String, required: true },
   isChecked: { type: Boolean },
+  hasPost: { type: Boolean },
 });
 
 // create a model that conforms to the schema
@@ -15,12 +16,13 @@ const ListItem = mongoose.model('listItem', listItemSchema);
 // create schema for bucket list posts
 const postSchema = new Schema({
   listItem: { type: String, required: true },
-  date: { type: String, required: true },
+  dateCompleted: { type: String, required: true },
   postDescription: { type: String, required: true },
   location: { type: String, required: true },
   // is the above a Google Maps URL or a string that tells Maps to make a map?
   youtubeLink: String,
-  // imageUpload: Come back to this. Use GridFS to store images
+  images: [{type: String}],
+
 });
 
 // create a model that conforms to the schema
